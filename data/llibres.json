@@ -1,0 +1,84 @@
+[
+    
+    {
+        "id": 1,
+        "titol": "1984",
+
+        "autor": [
+            "George Orwell"
+        ]
+    },
+    {
+        "id": 2,
+        "titol": "El principito",
+
+        "autor": [
+            "Antoine de Saint-Exupéry"
+        ]
+    },
+    {
+        "id": 3,
+        "titol": "Don Quijote de la Mancha",
+
+        "autor": [
+            "Miguel de Cervantes"
+        ]
+    },
+    {
+        "id": 4,
+        "titol": "Crimen y castigo",
+
+        "autor": [
+            "Fiódor Dostoyevski"
+        ]
+    },
+    {
+        "id": 5,
+        "titol": "Orgullo y prejuicio",
+
+        "autor": [
+            "Jane Austen"
+        ]
+    },
+    {
+        "id": 6,
+        "titol": "Rayuela",
+
+        "autor": [
+            "Julio Cortázar"
+        ]
+    },
+    {
+        "id": 7,
+        "titol": "La Odisea",
+
+        "autor": [
+            "Homero"
+        ]
+    },
+    {
+        "id": 8,
+        "titol": "Matar a un ruiseñor",
+
+        "autor": [
+            "Harper Lee"
+        ]
+    },
+    {
+        "id": 9,
+        "titol": "Ulises",
+
+        "autor": [
+            "James Joyce"
+        ]
+    },
+    {
+        "id": 10,
+
+        "titol": "Cien años de soledad",
+
+        "autor": [
+            "Gabriel García Márquez"
+        ]
+    }
+]
