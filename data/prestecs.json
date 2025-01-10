@@ -1,10 +1,10 @@
 [
     {
-    "Id": 1,
-    "Id_llibres": 1,
-    "Id d'usuari": 1,
-    "Data de prestec": "09-10-2024",
-    "Data de devolució": "20-10-2024"
+        "Id": 1,
+        "Id_llibres": 1,
+        "Id d'usuari": 1,
+        "Data de prestec": "09-10-2024",
+        "Data de devolució": "20-10-2024"
     },
     {
         "Id": 2,
@@ -69,6 +69,4 @@
         "Data de prestec": "02-01-2025",
         "Data de devolució": "15-01-2025"
     }
-
-
 ]
