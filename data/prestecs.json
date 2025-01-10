@@ -4,70 +4,70 @@
     "Id_llibres": 1,
     "Id d'usuari": 1,
     "Data de prestec": "09-10-2024",
-    "Data de devolució": "20-10-2024",
-    }
+    "Data de devolució": "20-10-2024"
+    },
     {
         "Id": 2,
         "Id_llibres": 2,
         "Id d'usuari": 2,
         "Data de prestec": "20-09-2024",
-        "Data de devolució": "20-10-2024",
-    }
+        "Data de devolució": "20-10-2024"
+    },
     {
         "Id": 3,
         "Id_llibres": 3,
         "Id d'usuari": 3,
         "Data de prestec": "09-05-2024",
-        "Data de devolució": "01-06-2024",
-    }
+        "Data de devolució": "01-06-2024"
+    },
     {
         "Id": 4,
         "Id_llibres": 4,
         "Id d'usuari": 1,
         "Data de prestec": "10-10-2024",
-        "Data de devolució": "22-10-2024",
-    }
+        "Data de devolució": "22-10-2024"
+    },
     {
         "Id": 5,
         "Id_llibres": 5,
         "Id d'usuari": 5,
         "Data de prestec": "09-10-2024",
-        "Data de devolució": "20-10-2024",
-    }
+        "Data de devolució": "20-10-2024"
+    },
     {
         "Id": 6,
         "Id_llibres": 6,
         "Id d'usuari": 6,
         "Data de prestec": "09-10-2024",
-        "Data de devolució": "20-10-2024",
-    }
+        "Data de devolució": "20-10-2024"
+    },
     {
         "Id": 7,
         "Id_llibres": 7,
         "Id d'usuari": 7,
         "Data de prestec": "04-10-2024",
-        "Data de devolució": "20-12-2024",
-    }
+        "Data de devolució": "20-12-2024"
+    },
     {
         "Id": 8,
         "Id_llibres": 8,
         "Id d'usuari": 8,
         "Data de prestec": "29-12-2024",
-        "Data de devolució": "04-01-2025",
-    }
+        "Data de devolució": "04-01-2025"
+    },
     {
         "Id": 9,
         "Id_llibres": 9,
         "Id d'usuari": 9,
         "Data de prestec": "09-01-2025",
-        "Data de devolució": "10-01-2025",
-    }
+        "Data de devolució": "10-01-2025"
+    },
     {
         "Id": 10,
         "Id_llibres": 10,
         "Id d'usuari": 10,
         "Data de prestec": "02-01-2025",
-        "Data de devolució": "15-01-2025",
+        "Data de devolució": "15-01-2025"
     }
 
 
