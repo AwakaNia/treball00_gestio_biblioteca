@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        menuPrincipal(); // Inicia el programa desde el menú principal
+        menuPrincipal(); 
     }
 
     // MENÚ PRINCIPAL
