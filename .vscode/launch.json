@@ -3,17 +3,11 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Main",
+            "name": "Ejecutar Main",
             "request": "launch",
             "mainClass": "com.biblioteca.Main",
-            "projectName": "mi-proyecto"
-        },
-        {
-            "type": "java",
-            "name": "Launch Main",
-            "request": "launch",
-            "mainClass": "com.biblioteca.Main",
-            "projectName": "Treball00"
+            "projectName": "Biblioteca"
         }
     ]
 }
+
