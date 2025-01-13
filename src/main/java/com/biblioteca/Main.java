@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        menuPrincipal(); 
+        menuPrincipal(); // Inicia el programa desde el menú principal
     }
 
     // MENÚ PRINCIPAL
@@ -165,6 +165,48 @@ public class Main {
         } while (!opcio.equals("0"));
     }
 
+    // SUBMENÚ LLISTAR USUARIS
+    public static void llistarUsuaris() {
+        Scanner scanner = new Scanner(System.in);
+        String opcio;
+
+        do {
+            System.out.println("Llistar usuaris ");
+            System.out.println("1. Tots");
+            System.out.println("2. Per id");
+            System.out.println("3. Per nom");
+            System.out.println("4. Per cognom");
+            System.out.println("4. Per telefon");
+            System.out.println("0. Tornar al menú de llibres");
+
+            opcio = scanner.nextLine().trim().toLowerCase();
+
+            switch (opcio) {
+                case "1":
+                    System.out.println("Llistant tots els usuaris...");
+                    break;
+                case "2":
+                    System.out.println("Llistant usuaris per id...");
+                    break;
+                case "3":
+                    System.out.println("Llistant  usuaris per nom...");
+                    break;
+                case "4":
+                    System.out.println("Llistant  usuaris per cognom...");
+                    break;
+                case "5":
+                System.out.println("Llistant usuaris per telefon...");
+                break;
+                case "0":
+                    System.out.println("Tornant al menú de llibres...");
+                    break;
+                default:
+                    System.out.println("Opció no vàlida. Intenta de nou.");
+                    break;
+            }
+        } while (!opcio.equals("0"));
+    }
+    
     // MENÚ PRÉSTECS
     public static void menuPrestecs() {
         Scanner scanner = new Scanner(System.in);
@@ -202,20 +244,89 @@ public class Main {
             }
         } while (!opcio.equals("0"));
     }
+   
+    // SUBMENÚ LLISTAR USUARIS
+    public static void llistarPrestecs() {
+        Scanner scanner = new Scanner(System.in);
+        String opcio;
 
-    // FUNCIONES PARA CADA ACCIÓN
+        do {
+            System.out.println("Llistar prestecs ");
+            System.out.println("1. Tots");
+            System.out.println("2. Per id");
+            System.out.println("3. Per id llibres");
+            System.out.println("4. Per id usuaris");
+            System.out.println("4. Per data prestec");
+            System.out.println("4. Per data devolucio");
+            System.out.println("0. Tornar al menú de llibres");
+
+            opcio = scanner.nextLine().trim().toLowerCase();
+
+            switch (opcio) {
+                case "1":
+                    System.out.println("Llistant tots els prestecs...");
+                    break;
+                case "2":
+                    System.out.println("Llistant prestecs per id...");
+                    break;
+                case "3":
+                    System.out.println("Llistant  prestecs per id de llibre...");
+                    break;
+                case "4":
+                    System.out.println("Llistant prestecs per id usuari...");
+                    break;
+                case "5":
+                    System.out.println("Llistant prestecs per data prestec...");
+                    break;
+                case "6":
+                    System.out.println("Llistant prestecs per data devolucio...");
+                    break;
+                case "0":
+                    System.out.println("Tornant al menú de llibres...");
+                    break;
+                default:
+                    System.out.println("Opció no vàlida. Intenta de nou.");
+                    break;
+            }
+        } while (!opcio.equals("0"));
+    }
+    // FUNCIONES 
     public static void afegirLlibre() {
         System.out.println("Afegint llibre...");
-        // Aquí puedes agregar la lógica para añadir un libro
+        
+    }
+    public static void afegirUsuari() {
+        System.out.println("Afegint ...");
+        
+    }
+    public static void afegirPrestec() {
+        System.out.println("Afegint ...");
+        
     }
 
     public static void modificarLlibre() {
-        System.out.println("Modificant llibre...");
-        // Aquí puedes agregar la lógica para modificar un libro
+        System.out.println("Modificant ...");
+        
+    }
+    public static void modificarUsuari() {
+        System.out.println("Modificant ...");
+        
+    }
+    public static void modificarPrestec() {
+        System.out.println("Modificant ...");
+        
     }
 
     public static void eliminarLlibre() {
         System.out.println("Eliminant llibre...");
-        // Aquí puedes agregar la lógica para eliminar un libro
+        
+    }
+    public static void eliminarUsuari() {
+        System.out.println("Eliminant llibre...");
+        
+    }
+    public static void eliminarPrestec() {
+        System.out.println("Eliminant llibre...");
+        
     }
 }
