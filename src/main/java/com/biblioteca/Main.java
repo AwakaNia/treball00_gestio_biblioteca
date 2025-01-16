@@ -85,7 +85,7 @@ public class Main {
                     break;
                 case "4":
                 case "llistar":
-                    llistarLlibres(); // Llama al submenú de listar libros
+                    llistarLlibresID(); // Llama al submenú de listar libros
                     break;
                 case "0":
                     System.out.println("Tornant al menú principal...");
@@ -325,7 +325,6 @@ public class Main {
         System.out.println("Eliminant llibre...");
         
     }
-}
 
 
 // FUNCIONES
@@ -401,3 +400,61 @@ public class Main {
             System.out.println("Error al guardar el archivo JSON.");
         }
     }
+
+    // Función para listar los libros con sus ID
+    public static void llistarLlibresID() {
+        JsonArray llibres = leerLlibresJson();
+        
+        if (llibres.size() == 0) {
+            System.out.println("No hay libros en la biblioteca.");
+        } else {
+            System.out.println("Llistant els llibres disponibles:");
+            for (int i = 0; i < llibres.size(); i++) {
+                JsonObject llibre = llibres.get(i).getAsJsonObject();
+                int id = llibre.get("id").getAsInt();
+                String titol = llibre.get("titol").getAsString();
+                System.out.println("ID: " + id + " - Títol: " + titol);
+            }
+        }
+    }
+
+    // Función para eliminar un libro por ID
+    public static void eliminarLlibre() {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Listar los libros
+        llistarLlibresID();
+        
+        // Pedir al usuario el ID del libro a eliminar
+        System.out.print("Introduce el ID del libro que quieres eliminar: ");
+        int idEliminar = Integer.parseInt(scanner.nextLine().trim());
+        
+        // Leer el archivo JSON
+        JsonArray llibres = leerLlibresJson();
+        boolean encontrado = false;
+        
+        // Buscar y eliminar el libro con el ID dado
+        for (int i = 0; i < llibres.size(); i++) {
+            JsonObject llibre = llibres.get(i).getAsJsonObject();
+            int id = llibre.get("id").getAsInt();
+            
+            if (id == idEliminar) {
+                llibres.remove(i);
+                encontrado = true;
+                System.out.println("El libro con ID " + idEliminar + " ha sido eliminado.");
+                break;
+            }
+        }
+        
+        if (!encontrado) {
+            System.out.println("No se ha encontrado un libro con ese ID.");
+        } else {
+            // Guardar el archivo actualizado
+            guardarLlibresJson(llibres);
+        }
+    }
+
+    public static void modificarLlibre() {
+        System.out.println("Modificant llibre...");
+    }
+}
