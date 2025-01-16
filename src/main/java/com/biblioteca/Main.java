@@ -1,5 +1,7 @@
 package com.biblioteca;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -124,9 +126,11 @@ public class Main {
                     break;
                 case "3":
                     System.out.println("Llistant llibres per autor...");
+                    llistarLlibresPerAutor();
                     break;
                 case "4":
                     System.out.println("Cercant llibres per títol...");
+                    llistarLlibresPerTitol();
                     break;
                 case "0":
                     System.out.println("Tornant al menú de llibres...");
@@ -511,5 +515,68 @@ public class Main {
         System.out.println("Llibre modificat correctament.");
     }
 
-    
+    public static void llistarLlibresPerAutor() {
+    JsonArray llibres = leerLlibresJson();
+    List<JsonObject> llibresOrdenats = new ArrayList<>();
+
+    // Añadir todos los libros a la lista para ordenarlos
+    for (int i = 0; i < llibres.size(); i++) {
+        JsonObject llibre = llibres.get(i).getAsJsonObject();
+        llibresOrdenats.add(llibre);
+    }
+
+    // Ordenar los libros por el nombre del autor (primer autor en la lista) y luego por título
+    llibresOrdenats.sort((o1, o2) -> {
+        String autor1 = o1.getAsJsonArray("autor").get(0).getAsString().toLowerCase();
+        String autor2 = o2.getAsJsonArray("autor").get(0).getAsString().toLowerCase();
+        if (autor1.equals(autor2)) {
+            // Si los autores son iguales, ordenar por título
+            String titol1 = o1.get("titol").getAsString().toLowerCase();
+            String titol2 = o2.get("titol").getAsString().toLowerCase();
+            return titol1.compareTo(titol2);
+        }
+        return autor1.compareTo(autor2);
+    });
+
+    // Mostrar los libros ordenados
+    if (llibresOrdenats.isEmpty()) {
+        System.out.println("No hi ha llibres disponibles.");
+    } else {
+        System.out.println("Llistant tots els llibres ordenats per autor:");
+        for (JsonObject llibre : llibresOrdenats) {
+            int id = llibre.get("id").getAsInt();
+            String titol = llibre.get("titol").getAsString();
+            JsonArray autores = llibre.getAsJsonArray("autor");
+            String autoresString = autores.toString();
+
+            System.out.println("ID: " + id + " - Títol: " + titol + " - Autors: " + autoresString);
+        }
+    }
+}
+
+public static void llistarLlibresPerTitol() {
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("Introduce parte o todo el título del libro: ");
+    String titolBuscado = scanner.nextLine().trim().toLowerCase();
+
+    JsonArray llibres = leerLlibresJson();
+    boolean hayResultados = false;
+
+    System.out.println("Cercant llibres pel títol: " + titolBuscado);
+    for (int i = 0; i < llibres.size(); i++) {
+        JsonObject llibre = llibres.get(i).getAsJsonObject();
+        String titol = llibre.get("titol").getAsString().toLowerCase();
+
+        if (titol.contains(titolBuscado)) {
+            hayResultados = true;
+            int id = llibre.get("id").getAsInt();
+            System.out.println("ID: " + id + " - Títol: " + llibre.get("titol").getAsString());
+        }
+    }
+
+    if (!hayResultados) {
+        System.out.println("No s'han trobat llibres amb aquest títol.");
+    }
+}
+
 }    
