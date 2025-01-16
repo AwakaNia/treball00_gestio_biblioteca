@@ -85,7 +85,7 @@ public class Main {
                     break;
                 case "4":
                 case "llistar":
-                    llistarLlibresID(); // Llama al submenú de listar libros
+                    llistarLlibres(); // Llama al submenú de listar libros
                     break;
                 case "0":
                     System.out.println("Tornant al menú principal...");
@@ -114,7 +114,10 @@ public class Main {
 
             switch (opcio) {
                 case "1":
-                    System.out.println("Llistant tots els llibres...");
+                    System.out.println(" ");
+                    llistarLlibresID();
+                    System.out.println("Presiona Enter para continuar...");
+                    scanner.nextLine();
                     break;
                 case "2":
                     System.out.println("Llistant llibres en préstec...");
@@ -455,6 +458,56 @@ public class Main {
     }
 
     public static void modificarLlibre() {
-        System.out.println("Modificant llibre...");
+        Scanner scanner = new Scanner(System.in);
+        JsonArray llibres = leerLlibresJson(); // Asegúrate de tener esta función implementada para leer el JSON.
+    
+        if (llibres.size() == 0) {
+            System.out.println("No hi ha llibres disponibles per modificar.");
+            return;
+        }
+    
+        System.out.println("Llistat de llibres:");
+        for (int i = 0; i < llibres.size(); i++) {
+            JsonObject llibre = llibres.get(i).getAsJsonObject();
+            System.out.println("ID: " + llibre.get("id").getAsInt() + " - Títol: " + llibre.get("titol").getAsString());
+        }
+    
+        System.out.print("Introdueix l'ID del llibre a modificar: ");
+        int id = scanner.nextInt();
+        scanner.nextLine(); // Consumir el salto de línea
+    
+        JsonObject llibreAModificar = null;
+        for (int i = 0; i < llibres.size(); i++) {
+            JsonObject llibre = llibres.get(i).getAsJsonObject();
+            if (llibre.get("id").getAsInt() == id) {
+                llibreAModificar = llibre;
+                break;
+            }
+        }
+    
+        if (llibreAModificar == null) {
+            System.out.println("No s'ha trobat cap llibre amb l'ID indicat.");
+            return;
+        }
+    
+        System.out.print("Introdueix el nou títol del llibre (deixa en blanc per mantenir-lo): ");
+        String nouTitol = scanner.nextLine();
+        if (!nouTitol.isEmpty()) {
+            llibreAModificar.addProperty("titol", nouTitol);
+        }
+    
+        System.out.print("Introdueix els nous autors (separats per comes, deixa en blanc per mantenir-los): ");
+        String nousAutors = scanner.nextLine();
+        if (!nousAutors.isEmpty()) {
+            String[] autors = nousAutors.split(",");
+            JsonArray arrayAutors = new JsonArray();
+            for (String autor : autors) {
+                arrayAutors.add(autor.trim());
+            }
+            llibreAModificar.add("autors", arrayAutors);
+        }
+    
+        guardarLlibresJson(llibres); // Utiliza la función que ya tienes.
+        System.out.println("Llibre modificat correctament.");
     }
-}
+}    
