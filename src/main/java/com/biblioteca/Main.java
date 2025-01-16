@@ -291,10 +291,6 @@ public class Main {
         } while (!opcio.equals("0"));
     }
     // FUNCIONES 
-    public static void afegirLlibre() {
-        System.out.println("Afegint llibre...");
-        
-    }
     public static void afegirUsuari() {
         System.out.println("Afegint ...");
         
@@ -304,10 +300,6 @@ public class Main {
         
     }
 
-    public static void modificarLlibre() {
-        System.out.println("Modificant ...");
-        
-    }
     public static void modificarUsuari() {
         System.out.println("Modificant ...");
         
@@ -317,10 +309,6 @@ public class Main {
         
     }
 
-    public static void eliminarLlibre() {
-        System.out.println("Eliminant llibre...");
-        
-    }
     public static void eliminarUsuari() {
         System.out.println("Eliminant llibre...");
         
@@ -330,3 +318,78 @@ public class Main {
         
     }
 }
+
+
+// FUNCIONES
+
+    // Función para añadir un libro
+    public static void afegirLlibre() {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Obtener el título y el autor del libro
+        System.out.print("Introduce el título del libro: ");
+        String titol = scanner.nextLine();
+        
+        System.out.print("Introduce el autor del libro (puedes ingresar varios autores separados por comas): ");
+        String autoresInput = scanner.nextLine();
+        
+        // Convertir los autores en un array de strings
+        String[] autores = autoresInput.split(",");
+        
+        // Leer el archivo JSON existente y cargarlo en una estructura de datos
+        JsonArray llibres = leerLlibresJson();
+        
+        // Obtener el próximo id disponible (es el siguiente número en la lista)
+        int nextId = llibres.size() + 1;
+        
+        // Crear el objeto JSON para el nuevo libro
+        JsonObject nouLlibre = new JsonObject();
+        nouLlibre.addProperty("id", nextId);
+        nouLlibre.addProperty("titol", titol);
+        
+        // Añadir los autores al libro
+        JsonArray autoresArray = new JsonArray();
+        for (String autor : autores) {
+            autoresArray.add(autor.trim());
+        }
+        nouLlibre.add("autor", autoresArray);
+        
+        // Añadir el nuevo libro al array de libros
+        llibres.add(nouLlibre);
+        
+        // Guardar el array de libros actualizado en el archivo JSON
+        guardarLlibresJson(llibres);
+        
+        System.out.println("El libro ha sido añadido correctamente.");
+    }
+    
+    // Función para leer el archivo JSON
+    public static JsonArray leerLlibresJson() {
+        JsonArray llibres = new JsonArray();
+        File archivo = new File("data/llibres.json");
+
+        if (archivo.exists()) {
+            try {
+                FileReader reader = new FileReader("data/llibres.json");
+                Gson gson = new Gson();
+                llibres = gson.fromJson(reader, JsonArray.class);
+                reader.close();
+            } catch (IOException e) {
+                System.out.println("Error al leer el archivo JSON.");
+            }
+        }
+        
+        return llibres;
+    }
+    
+    // Función para guardar el archivo JSON
+    public static void guardarLlibresJson(JsonArray llibres) {
+        try {
+            FileWriter writer = new FileWriter("data/llibres.json");
+            Gson gson = new Gson();
+            gson.toJson(llibres, writer);
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error al guardar el archivo JSON.");
+        }
+    }
