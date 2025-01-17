@@ -173,7 +173,8 @@ public class Main {
                     funcionsUsuaris.eliminarUsuari();
                     break;
                 case "4":
-                    System.out.println("Llistant usuaris...");
+                    System.out.println(" ");
+                    llistarUsuaris();
                     break;
                 case "0":
                     System.out.println("Tornant al menú principal...");

@@ -186,6 +186,7 @@ public class funcionsUsuaris {
         }
 
         guardarUsuarisJson(usuaris);
+
         System.out.println("Usuari modificat correctament.");
     }
 }
