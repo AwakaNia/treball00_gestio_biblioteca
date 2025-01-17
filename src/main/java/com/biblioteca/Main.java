@@ -162,12 +162,15 @@ public class Main {
             switch (opcio) {
                 case "1":
                     System.out.println("Afegint usuari...");
+                    funcionsUsuaris.afegirUsuari();
                     break;
                 case "2":
                     System.out.println("Modificant usuari...");
+                    funcionsUsuaris.modificarUsuari();
                     break;
                 case "3":
                     System.out.println("Eliminant usuari...");
+                    funcionsUsuaris.eliminarUsuari();
                     break;
                 case "4":
                     System.out.println("Llistant usuaris...");
