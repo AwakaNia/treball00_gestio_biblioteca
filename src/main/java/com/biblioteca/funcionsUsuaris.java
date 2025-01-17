@@ -9,6 +9,16 @@ import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class funcionsUsuaris {
 
@@ -189,4 +199,165 @@ public class funcionsUsuaris {
 
         System.out.println("Usuari modificat correctament.");
     }
+
+
+
+
+    //Llistat d'usuaris amb préstecs actius
+    public static void llistarUsuariPrestecsActius()  {
+        try {
+            // Leer los archivos JSON
+            JSONArray usuarisJson = readJsonArray("data/usuaris.json");
+            JSONArray prestecsJson = readJsonArray("data/prestecs.json");
+            JSONArray llibresJson = readJsonArray("data/llibres.json");
+
+            // Obtener la fecha actual
+            LocalDate fechaActual = LocalDate.now();
+
+            // Filtrar préstamos activos
+            List<JSONObject> prestamosActivos = new ArrayList<>();
+            for (int i = 0; i < prestecsJson.length(); i++) {
+                JSONObject prestec = prestecsJson.getJSONObject(i);
+
+                // Comprobar si la fecha de devolución está vacía o posterior a la fecha actual
+                String dataDevolucio = prestec.optString("DataDevolucio", null);
+                if (dataDevolucio == null || dataDevolucio.isEmpty() ||
+                        LocalDate.parse(dataDevolucio, DateTimeFormatter.ISO_DATE).isAfter(fechaActual)) {
+                    prestamosActivos.add(prestec);
+                }
+            }
+
+            // Generar listado de usuarios con préstamos activos
+            List<JSONObject> usuariosConPrestamosActivos = new ArrayList<>();
+            for (int i = 0; i < usuarisJson.length(); i++) {
+                JSONObject usuari = usuarisJson.getJSONObject(i);
+
+                // Comprobar si el usuario tiene préstamos activos
+                int idUsuario = usuari.getInt("id");
+                boolean tienePrestamosActivos = prestamosActivos.stream()
+                        .anyMatch(prestec -> prestec.getInt("Id d'usuari") == idUsuario);
+
+                if (tienePrestamosActivos) {
+                    usuariosConPrestamosActivos.add(usuari);
+                }
+            }
+
+            // Mostrar el listado en consola
+            System.out.println("Llistat d'usuaris amb préstecs actius:");
+            for (JSONObject usuario : usuariosConPrestamosActivos) {
+                System.out.println(usuario.getString("nom") + " " +
+                        usuario.getString("cognom") + " (Telèfon: " +
+                        usuario.getString("telefon") + ")");
+
+                // Mostrar información de los libros asociados a los préstamos activos del usuario
+                int idUsuario = usuario.getInt("id");
+                prestamosActivos.stream()
+                        .filter(prestec -> prestec.getInt("Id d'usuari") == idUsuario)
+                        .forEach(prestec -> {
+                            int idLlibre = prestec.getInt("Id_llibres");
+
+                            // Buscar el libro en la lista de libros
+                            for (int j = 0; j < llibresJson.length(); j++) {
+                                JSONObject llibre = llibresJson.getJSONObject(j);
+                                if (llibre.getInt("id") == idLlibre) {
+                                    System.out.println("\t- Llibre ID: " + llibre.getInt("id") +
+                                            ", Títol: " + llibre.getString("titol"));
+                                }
+                            }
+                        });
 }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método para leer un archivo JSON y devolver un JSONArray
+    public static JSONArray readJsonArray(String filePath) throws IOException {
+        String content = new String(Files.readAllBytes(Paths.get(filePath)));
+        return new JSONArray(content);
+    }
+
+
+       // Llistat d'usuaris amb préstecs no actius
+public static void llistarUsuariPrestecsNoActius() {
+    try {
+        // Leer los archivos JSON
+        JSONArray usuarisJson = readJsonArray("data/usuaris.json");
+        JSONArray prestecsJson = readJsonArray("data/prestecs.json");
+        JSONArray llibresJson = readJsonArray("data/llibres.json");
+
+        // Obtener la fecha actual
+        LocalDate fechaActual = LocalDate.now();
+
+        // Filtrar préstamos no activos (aquellos con fecha de devolución pasada o sin devolución)
+        List<JSONObject> prestamosNoActivos = new ArrayList<>();
+        for (int i = 0; i < prestecsJson.length(); i++) {
+            JSONObject prestec = prestecsJson.getJSONObject(i);
+
+            // Comprobar si la fecha de devolución está pasada o es nula
+            String dataDevolucio = prestec.optString("DataDevolucio", null);
+            if (dataDevolucio == null || dataDevolucio.isEmpty() ||
+                    LocalDate.parse(dataDevolucio, DateTimeFormatter.ISO_DATE).isBefore(fechaActual)) {
+                prestamosNoActivos.add(prestec);
+            }
+        }
+
+        // Obtener los usuarios que no tienen préstamos activos
+        List<JSONObject> usuariosSinPrestamosActivos = new ArrayList<>();
+        for (int i = 0; i < usuarisJson.length(); i++) {
+            JSONObject usuari = usuarisJson.getJSONObject(i);
+
+            // Comprobar si el usuario tiene préstamos activos en prestecsJson
+            int idUsuario = usuari.getInt("id");
+            boolean tienePrestamosActivos = prestamosNoActivos.stream()
+                    .anyMatch(prestec -> prestec.getInt("Id d'usuari") == idUsuario);
+
+            // Si el usuario no tiene préstamos activos, lo agregamos a la lista
+            if (!tienePrestamosActivos) {
+                usuariosSinPrestamosActivos.add(usuari);
+            }
+        }
+
+        // Mostrar el listado en consola
+        System.out.println("Llistat d'usuaris sense préstecs actius:");
+        for (JSONObject usuario : usuariosSinPrestamosActivos) {
+            System.out.println(usuario.getString("nom") + " " +
+                    usuario.getString("cognom") + " (Telèfon: " +
+                    usuario.getString("telefon") + ")");
+
+            // Mostrar información de los libros asociados a los préstamos no activos del usuario
+            int idUsuario = usuario.getInt("id");
+            prestamosNoActivos.stream()
+                    .filter(prestec -> prestec.getInt("Id d'usuari") == idUsuario)
+                    .forEach(prestec -> {
+                        int idLlibre = prestec.getInt("Id_llibres");
+
+                        // Buscar el libro en la lista de libros
+                        for (int j = 0; j < llibresJson.length(); j++) {
+                            JSONObject llibre = llibresJson.getJSONObject(j);
+                            if (llibre.getInt("id") == idLlibre) {
+                                System.out.println("\t- Llibre ID: " + llibre.getInt("id") +
+                                        ", Títol: " + llibre.getString("titol"));
+                            }
+                        }
+                    });
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+
+
+
+
+
+    
+}
+
+
+
+

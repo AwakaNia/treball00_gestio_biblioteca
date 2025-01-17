@@ -4,21 +4,21 @@
         "Id_llibres": 1,
         "Id d'usuari": 1,
         "Data de prestec": "09-10-2024",
-        "Data de devolucio": "20-10-2024"
+        "Data de devolucio": "20-10-2025"
     },
     {
         "Id": 2,
         "Id_llibres": 2,
         "Id d'usuari": 2,
         "Data de prestec": "20-09-2024",
-        "Data de devolucio": "20-10-2024"
+        "Data de devolucio": "20-10-2028"
     },
     {
         "Id": 3,
         "Id_llibres": 3,
         "Id d'usuari": 3,
-        "Data de prestec": "09-05-2024",
-        "Data de devolucio": "01-06-2024"
+        "Data de prestec": "09-05-2020",
+        "Data de devolucio": "01-06-2022"
     },
     {
         "Id": 4,
@@ -61,12 +61,5 @@
         "Id d'usuari": 9,
         "Data de prestec": "09-01-2025",
         "Data de devolucio": "10-01-2025"
-    },
-    {
-        "Id": 10,
-        "Id_llibres": 10,
-        "Id d'usuari": 10,
-        "Data de prestec": "02-01-2025",
-        "Data de devolucio": "15-01-2025"
     }
 ]

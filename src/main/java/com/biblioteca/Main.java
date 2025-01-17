@@ -194,8 +194,8 @@ public class Main {
         do {
             System.out.println("Llistar usuaris ");
             System.out.println("1. Tots");
-            System.out.println("2. Per id");
-            System.out.println("3. Per nom");
+            System.out.println("2. Usuaris Prestecs Actiu");
+            System.out.println("3. Usuaris Prestecs Fora Termini");
             System.out.println("4. Per cognom");
             System.out.println("4. Per telefon");
             System.out.println("0. Tornar al menú de llibres");
@@ -204,20 +204,20 @@ public class Main {
 
             switch (opcio) {
                 case "1":
+
                     System.out.println("Llistant tots els usuaris...");
                     break;
                 case "2":
+                    funcionsUsuaris.llistarUsuariPrestecsActius();
                     System.out.println("Llistant usuaris per id...");
                     break;
                 case "3":
-                    System.out.println("Llistant  usuaris per nom...");
+                    funcionsUsuaris.llistarUsuariPrestecsNoActius();
+                    System.out.println("Llistant  usuaris Prestecs Actiu...");
                     break;
                 case "4":
-                    System.out.println("Llistant  usuaris per cognom...");
+                    System.out.println("Llistant  usuaris Prestecs Fora Termini...");
                     break;
-                case "5":
-                System.out.println("Llistant usuaris per telefon...");
-                break;
                 case "0":
                     System.out.println("Tornant al menú de llibres...");
                     break;
