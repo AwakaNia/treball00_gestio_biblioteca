@@ -22,21 +22,41 @@ import java.util.List;
 
 public class funcionsUsuaris {
 
-    // FUNCIONES
+   // FUNCIONES
 
     // Función para añadir un usuario
     public static void afegirUsuari() {
         Scanner scanner = new Scanner(System.in);
 
-        // Obtener el nombre, apellido y teléfono del usuario
-        System.out.print("Introduce el nombre del usuario: ");
-        String nom = scanner.nextLine();
+        // Obtener el nombre del usuario
+        String nom;
+        do {
+            System.out.print("Introduce el nombre del usuario: ");
+            nom = scanner.nextLine().trim();
+            if (nom.isEmpty()) {
+                System.out.println("El nombre no puede estar vacío. Intenta de nuevo.");
+            }
+        } while (nom.isEmpty());
 
-        System.out.print("Introduce el apellido del usuario: ");
-        String cognom = scanner.nextLine();
+        // Obtener el apellido del usuario
+        String cognom;
+        do {
+            System.out.print("Introduce el apellido del usuario: ");
+            cognom = scanner.nextLine().trim();
+            if (cognom.isEmpty()) {
+                System.out.println("El apellido no puede estar vacío. Intenta de nuevo.");
+            }
+        } while (cognom.isEmpty());
 
-        System.out.print("Introduce el teléfono del usuario: ");
-        String telefon = scanner.nextLine();
+        // Obtener el teléfono del usuario
+        String telefon;
+        do {
+            System.out.print("Introduce el número de teléfono del usuario (9 dígitos): ");
+            telefon = scanner.nextLine().trim();
+            if (!telefon.matches("\\d{9}")) {
+                System.out.println("El teléfono debe contener exactamente 9 dígitos numéricos. Intenta de nuevo.");
+            }
+        } while (!telefon.matches("\\d{9}"));
 
         // Leer el archivo JSON existente y cargarlo en una estructura de datos
         JsonArray usuaris = leerUsuarisJson();
@@ -96,7 +116,7 @@ public class funcionsUsuaris {
         JsonArray usuaris = leerUsuarisJson();
 
         if (usuaris.size() == 0) {
-            System.out.println("No hay usuarios registrados.");
+            System.out.println("No hay usuarios en la lista.");
         } else {
             System.out.println("Llistant els usuaris disponibles:");
             for (int i = 0; i < usuaris.size(); i++) {
@@ -178,30 +198,28 @@ public class funcionsUsuaris {
         }
 
         System.out.print("Introdueix el nou nom de l'usuari (deixa en blanc per mantenir-lo): ");
-        String nouNom = scanner.nextLine();
+        String nouNom = scanner.nextLine().trim();
         if (!nouNom.isEmpty()) {
             usuariAModificar.addProperty("nom", nouNom);
         }
 
-        System.out.print("Introdueix el nou cognom (deixa en blanc per mantenir-lo): ");
-        String nouCognom = scanner.nextLine();
+        System.out.print("Introdueix el nou cognom de l'usuari (deixa en blanc per mantenir-lo): ");
+        String nouCognom = scanner.nextLine().trim();
         if (!nouCognom.isEmpty()) {
             usuariAModificar.addProperty("cognom", nouCognom);
         }
 
-        System.out.print("Introdueix el nou telèfon (deixa en blanc per mantenir-lo): ");
-        String nouTelefon = scanner.nextLine();
-        if (!nouTelefon.isEmpty()) {
+        System.out.print("Introdueix el nou telèfon de l'usuari (9 dígits, deixa en blanc per mantenir-lo): ");
+        String nouTelefon = scanner.nextLine().trim();
+        if (!nouTelefon.isEmpty() && nouTelefon.matches("\\d{9}")) {
             usuariAModificar.addProperty("telefon", nouTelefon);
+        } else if (!nouTelefon.isEmpty()) {
+            System.out.println("El telèfon introduït no és vàlid. No s'ha actualitzat el número de telèfon.");
         }
 
         guardarUsuarisJson(usuaris);
-
         System.out.println("Usuari modificat correctament.");
     }
-
-
-
 
     //Llistat d'usuaris amb préstecs actius
     public static void llistarUsuariPrestecsActius()  {
@@ -351,11 +369,6 @@ public static void llistarUsuariPrestecsNoActius() {
 }
 
 
-
-
-
-
-    
 }
 
 
