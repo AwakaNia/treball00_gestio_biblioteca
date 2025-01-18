@@ -123,6 +123,8 @@ public class Main {
                     break;
                 case "2":
                     System.out.println("Llistant llibres en préstec...");
+                    System.out.println("Presiona Enter para continuar...");
+                    scanner.nextLine();
                     break;
                 case "3":
                     System.out.println("Llistant llibres per autor...");
@@ -133,12 +135,16 @@ public class Main {
                 case "4":
                     System.out.println("Cercant llibres per títol...");
                     funcionsLlibres.llistarLlibresPerTitol();
+                    System.out.println("Presiona Enter para continuar...");
+                    scanner.nextLine();
                     break;
                 case "0":
                     System.out.println("Tornant al menú de llibres...");
                     break;
                 default:
                     System.out.println("Opció no vàlida. Intenta de nou.");
+                    System.out.println("Presiona Enter para continuar...");
+                    scanner.nextLine();
                     break;
             }
         } while (!opcio.equals("0"));
@@ -196,33 +202,38 @@ public class Main {
             System.out.println("1. Tots");
             System.out.println("2. Usuaris Prestecs Actiu");
             System.out.println("3. Usuaris Prestecs Fora Termini");
-            System.out.println("4. Per cognom");
-            System.out.println("4. Per telefon");
             System.out.println("0. Tornar al menú de llibres");
 
             opcio = scanner.nextLine().trim().toLowerCase();
 
             switch (opcio) {
                 case "1":
-
+                    funcionsUsuaris.llistarUsuarisID();
                     System.out.println("Llistant tots els usuaris...");
+                    System.out.println("Presiona Enter para continuar...");
+                    scanner.nextLine();
                     break;
                 case "2":
                     funcionsUsuaris.llistarUsuariPrestecsActius();
-                    System.out.println("Llistant usuaris per id...");
+                    System.out.println("Llistant usuaris Prestecs Actiu...");
+                    System.out.println("Presiona Enter para continuar...");
+                    scanner.nextLine();
                     break;
                 case "3":
                     funcionsUsuaris.llistarUsuariPrestecsNoActius();
-                    System.out.println("Llistant  usuaris Prestecs Actiu...");
-                    break;
-                case "4":
                     System.out.println("Llistant  usuaris Prestecs Fora Termini...");
+                    System.out.println("Presiona Enter para continuar...");
+                    scanner.nextLine();
                     break;
+                
                 case "0":
                     System.out.println("Tornant al menú de llibres...");
+                    
                     break;
                 default:
                     System.out.println("Opció no vàlida. Intenta de nou.");
+                    System.out.println("Presiona Enter para continuar...");
+                    scanner.nextLine();
                     break;
             }
         } while (!opcio.equals("0"));
@@ -245,15 +256,19 @@ public class Main {
 
             switch (opcio) {
                 case "1":
+                    funcionsPrestecs.afegirPrestec();
                     System.out.println("Afegint préstec...");
                     break;
                 case "2":
+                    funcionsPrestecs.modificarPrestec();
                     System.out.println("Modificant préstec...");
                     break;
                 case "3":
+                    funcionsPrestecs.eliminarPrestec();
                     System.out.println("Eliminant préstec...");
                     break;
                 case "4":
+                    llistarPrestecs();
                     System.out.println("Llistant préstecs...");
                     break;
                 case "0":
@@ -274,70 +289,51 @@ public class Main {
         do {
             System.out.println("Llistar prestecs ");
             System.out.println("1. Tots");
-            System.out.println("2. Per id");
-            System.out.println("3. Per id llibres");
-            System.out.println("4. Per id usuaris");
-            System.out.println("4. Per data prestec");
-            System.out.println("4. Per data devolucio");
+            System.out.println("2. Per usuari");
+            System.out.println("3. Per préstecs actius");
+            System.out.println("4. Per préstecs fora de termini");
+            
             System.out.println("0. Tornar al menú de llibres");
 
             opcio = scanner.nextLine().trim().toLowerCase();
 
             switch (opcio) {
                 case "1":
+                    funcionsPrestecs.llistarPrestecsPerId();
                     System.out.println("Llistant tots els prestecs...");
+                    System.out.println("Presiona Enter para continuar...");
+                    scanner.nextLine();
                     break;
                 case "2":
-                    System.out.println("Llistant prestecs per id...");
+                    funcionsPrestecs.llistarPrestecsOpcion();
+                    System.out.println("Llistant prestecs per id d'usuari...");
+                    System.out.println("Presiona Enter para continuar...");
+                    scanner.nextLine();
                     break;
                 case "3":
-                    System.out.println("Llistant  prestecs per id de llibre...");
+                    System.out.println("Llistant  prestecs actius...");
+                    System.out.println("Presiona Enter para continuar...");
+                    scanner.nextLine();
                     break;
                 case "4":
-                    System.out.println("Llistant prestecs per id usuari...");
+                    System.out.println("Llistant préstecs fora de termini...");
+                    System.out.println("Presiona Enter para continuar...");
+                    scanner.nextLine();
                     break;
-                case "5":
-                    System.out.println("Llistant prestecs per data prestec...");
-                    break;
-                case "6":
-                    System.out.println("Llistant prestecs per data devolucio...");
-                    break;
+                
                 case "0":
                     System.out.println("Tornant al menú de llibres...");
+
                     break;
                 default:
                     System.out.println("Opció no vàlida. Intenta de nou.");
+                    System.out.println("Presiona Enter para continuar...");
+                    scanner.nextLine();
                     break;
             }
         } while (!opcio.equals("0"));
     }
-    // FUNCIONES 
-    public static void afegirUsuari() {
-        System.out.println("Afegint ...");
-        
-    }
-    public static void afegirPrestec() {
-        System.out.println("Afegint ...");
-        
-    }
-
-    public static void modificarUsuari() {
-        System.out.println("Modificant ...");
-        
-    }
-    public static void modificarPrestec() {
-        System.out.println("Modificant ...");
-        
-    }
-
-    public static void eliminarUsuari() {
-        System.out.println("Eliminant llibre...");
-        
-    }
-    public static void eliminarPrestec() {
-        System.out.println("Eliminant llibre...");
-        
-    }
+    
 
 
 }    

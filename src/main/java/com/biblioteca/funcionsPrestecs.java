@@ -1,8 +1,5 @@
 package com.biblioteca;
 
-public class funcionsPrestecs {
-    package com.biblioteca;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -281,7 +278,7 @@ public class funcionsPrestecs {
                 llistarPrestecsPerIdUsuari();
                 break;
             case 2:
-                llistarPrestecsPerNomUsuari();
+              //  llistarPrestecsPerNomUsuari();
                 break;
             default:
                 System.out.println("Opció no vàlida. Torna a intentar-ho.");

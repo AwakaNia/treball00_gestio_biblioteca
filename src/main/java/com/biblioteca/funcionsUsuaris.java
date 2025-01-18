@@ -339,7 +339,7 @@ public static void llistarUsuariPrestecsNoActius() {
         }
 
         // Mostrar el listado en consola
-        System.out.println("Llistat d'usuaris sense préstecs actius:");
+        System.out.println("Llistat d'usuaris amb prestecs fora de termini:");
         for (JSONObject usuario : usuariosSinPrestamosActivos) {
             System.out.println(usuario.getString("nom") + " " +
                     usuario.getString("cognom") + " (Telèfon: " +
