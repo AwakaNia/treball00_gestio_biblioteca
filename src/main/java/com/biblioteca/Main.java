@@ -123,6 +123,7 @@ public class Main {
                     break;
                 case "2":
                     System.out.println("Llistant llibres en préstec...");
+                    funcionsPrestecs.llistarPrestecs();
                     System.out.println("Presiona Enter para continuar...");
                     scanner.nextLine();
                     break;
