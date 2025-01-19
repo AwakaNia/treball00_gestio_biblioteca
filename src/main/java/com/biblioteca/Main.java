@@ -299,24 +299,24 @@ public class Main {
 
             switch (opcio) {
                 case "1":
-                    funcionsPrestecs.llistarPrestecsPerId();
+                    funcionsPrestecs.mostrarTodosPrestecs();
                     System.out.println("Llistant tots els prestecs...");
                     System.out.println("Presiona Enter para continuar...");
                     scanner.nextLine();
                     break;
                 case "2":
-                    funcionsPrestecs.llistarPrestecsOpcion();
+                    funcionsPrestecs.mostrarPrestecsPerUsuari();
                     System.out.println("Llistant prestecs per id d'usuari...");
                     System.out.println("Presiona Enter para continuar...");
                     scanner.nextLine();
                     break;
                 case "3":
-                    System.out.println("Llistant  prestecs actius...");
+                    funcionsPrestecs.mostrarPrestecsActius();
                     System.out.println("Presiona Enter para continuar...");
                     scanner.nextLine();
                     break;
                 case "4":
-                    System.out.println("Llistant préstecs fora de termini...");
+                    funcionsPrestecs.mostrarPrestecsForaTermini();
                     System.out.println("Presiona Enter para continuar...");
                     scanner.nextLine();
                     break;
@@ -334,6 +334,4 @@ public class Main {
         } while (!opcio.equals("0"));
     }
     
-
-
 }    

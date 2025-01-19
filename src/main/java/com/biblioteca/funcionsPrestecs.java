@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,9 +13,13 @@ import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import java.time.format.DateTimeFormatter;
+
 
 public class funcionsPrestecs {
-     // Función para añadir un préstamo
+    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    // Función para añadir un préstamo
+
     public static void afegirPrestec() {
         Scanner scanner = new Scanner(System.in);
 
@@ -288,18 +294,91 @@ public class funcionsPrestecs {
     // Método para listar préstamos por nombre de usuario
 
 
-    // Método auxiliar para mostrar los datos de un préstamo
-    private static void mostrarPrestec(JsonObject prestec) {
+        // Mostrar todos los préstamos
+    public static void mostrarTodosPrestecs() {
+        JsonArray prestecs = leerPrestecsJson();
+        if (prestecs.size() == 0) {
+            System.out.println("No hi ha préstecs registrats.");
+        } else {
+            System.out.println("Tots els préstecs:");
+            for (int i = 0; i < prestecs.size(); i++) {
+                mostrarPrestec(prestecs.get(i).getAsJsonObject());
+            }
+        }
+    }
+
+    // Mostrar préstamos por usuario
+    public static void mostrarPrestecsPerUsuari() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Introdueix l'ID de l'usuari: ");
+        int idUsuari = scanner.nextInt();
+
+        JsonArray prestecs = leerPrestecsJson();
+        boolean trobat = false;
+
+        System.out.println("Préstecs de l'usuari amb ID " + idUsuari + ":");
+        for (int i = 0; i < prestecs.size(); i++) {
+            JsonObject prestec = prestecs.get(i).getAsJsonObject();
+            if (prestec.get("Id d'usuari").getAsInt() == idUsuari) {
+                mostrarPrestec(prestec);
+                trobat = true;
+            }
+        }
+        if (!trobat) {
+            System.out.println("No s'ha trobat cap préstec per a l'usuari amb ID " + idUsuari);
+        }
+    }
+
+    // Mostrar préstamos activos
+    public static void mostrarPrestecsActius() {
+        JsonArray prestecs = leerPrestecsJson();
+        LocalDate avui = LocalDate.now();
+        boolean trobat = false;
+
+        System.out.println("Préstecs actius:");
+        for (int i = 0; i < prestecs.size(); i++) {
+            JsonObject prestec = prestecs.get(i).getAsJsonObject();
+            LocalDate dataDevolucio = LocalDate.parse(prestec.get("Data de devolucio").getAsString(), DATE_FORMAT);
+            if (!dataDevolucio.isBefore(avui)) {
+                mostrarPrestec(prestec);
+                trobat = true;
+            }
+        }
+        if (!trobat) {
+            System.out.println("No hi ha préstecs actius.");
+        }
+    }
+
+    // Mostrar préstamos fuera del término (vencidos)
+    public static void mostrarPrestecsForaTermini() {
+        JsonArray prestecs = leerPrestecsJson();
+        LocalDate avui = LocalDate.now();
+        boolean trobat = false;
+
+        System.out.println("Préstecs fora del termini:");
+        for (int i = 0; i < prestecs.size(); i++) {
+            JsonObject prestec = prestecs.get(i).getAsJsonObject();
+            LocalDate dataDevolucio = LocalDate.parse(prestec.get("Data de devolucio").getAsString(), DATE_FORMAT);
+            if (dataDevolucio.isBefore(avui)) {
+                mostrarPrestec(prestec);
+                trobat = true;
+            }
+        }
+        if (!trobat) {
+            System.out.println("No hi ha préstecs fora del termini.");
+        }
+    }
+
+    // Método auxiliar para mostrar un préstamo
+    public static void mostrarPrestec(JsonObject prestec) {
         int id = prestec.get("Id").getAsInt();
         int idLlibres = prestec.get("Id_llibres").getAsInt();
         int idUsuari = prestec.get("Id d'usuari").getAsInt();
-        String nomUsuari = prestec.has("Nom d'usuari") ? prestec.get("Nom d'usuari").getAsString() : "Desconegut";
         String dataPrestec = prestec.get("Data de prestec").getAsString();
         String dataDevolucio = prestec.get("Data de devolucio").getAsString();
 
-        System.out.println("ID Préstec: " + id + " - ID Llibre: " + idLlibres + " - ID Usuari: " + idUsuari + 
-            " - Nom Usuari: " + nomUsuari + " - Data de préstec: " + dataPrestec + " - Data de devolució: " + dataDevolucio);
+        System.out.println("ID: " + id + " - ID Llibre: " + idLlibres + " - ID Usuari: " + idUsuari
+                + " - Data de préstec: " + dataPrestec + " - Data de devolució: " + dataDevolucio);
     }
-
 }
 
